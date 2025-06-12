@@ -10,9 +10,11 @@
 {% block content %}
 <h2>🔧 Provider Dashboard</h2>
 <p>Welcome {{ user.username }}!</p>
+<p>👨‍🔧 This is your Provider Dashboard.</p>
 <ul>
-    <li><a href="#">Manage Services</a></li>
-    <li><a href="#">Booking Requests</a></li>
-    <li><a href="{% url 'provider_profile' %}">My Profile</a></li>
+    <li><a href="{% url 'provider_services' %}">🛠️ Manage My Services</a></li>
+    <li><a href="{% url 'service_create' %}">➕ Add New Service</a></li>
+    <li><a href="{% url 'provider_profile' %}">👤 Edit My Profile</a></li>
 </ul>
+
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Browse Services{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/service_browse.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="browse-container">
+    <h2>🔎 Browse Services</h2>
+
+    <form method="get" class="search-form">
+        <input type="text" name="q" placeholder="Search services..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if services %}
+    <div class="browse-grid">
+        {% for service in services %}
+        <div class="browse-card">
+            <h3><a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a></h3>
+            <p class="rate">₹{{ service.rate }} <span class="rate-type">({{ service.get_rate_type_display }})</span></p>
+            <p class="snippet">{{ service.description|truncatewords:20 }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">No services found.</p>
+    {% endif %}
+</div>
+{% endblock %}

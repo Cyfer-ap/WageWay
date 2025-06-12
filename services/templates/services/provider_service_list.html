@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Services{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/service_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="service-container">
+    <div class="header-row">
+        <h2>🧰 My Services</h2>
+        <a href="{% url 'service_create' %}" class="add-btn">➕ Add New Service</a>
+    </div>
+
+    {% if services %}
+    <div class="card-grid">
+        {% for s in services %}
+        <div class="service-card">
+            <div class="card-header">
+                <h3>{{ s.title }}</h3>
+                <span class="price">₹{{ s.rate }} <small>({{ s.get_rate_type_display }})</small></span>
+            </div>
+            <p class="description">{{ s.description|truncatechars:150 }}</p>
+            <p class="category">Category: {{ s.category }}</p>
+            <div class="card-actions">
+                <a href="{% url 'service_update' s.pk %}" class="edit-btn">✏️ Edit</a>
+                <a href="{% url 'service_delete' s.pk %}" class="delete-btn">🗑️ Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">You haven’t added any services yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

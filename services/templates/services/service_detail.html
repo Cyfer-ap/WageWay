@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} - Service Details{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/service_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-card">
+        {% if service.image %}
+        <div class="image-box">
+            <img src="{{ service.image.url }}" alt="Service Image">
+        </div>
+        {% endif %}
+
+        <div class="info-box">
+            <h2>{{ service.title }}</h2>
+            <p class="category">📁 <strong>Category:</strong> {{ service.category }}</p>
+            <p class="description">{{ service.description }}</p>
+
+            <ul class="meta-info">
+                <li><strong>📍 Area:</strong> {{ service.service_area }}</li>
+                <li><strong>📅 Available:</strong> {{ service.available_days }} @ {{ service.availability_time }}</li>
+                <li><strong>💰 Rate:</strong> ₹{{ service.rate }} ({{ service.get_rate_type_display }})</li>
+            </ul>
+
+            {% if service.certification %}
+            <p><a href="{{ service.certification.url }}" target="_blank" class="cert-btn">📄 View Certification</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

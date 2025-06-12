@@ -1,0 +1,110 @@
+/* services/css/service_browse.css */
+
+body {
+    background-color: #f9fbfc;
+}
+
+.browse-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.browse-container h2 {
+    font-size: 2rem;
+    color: #004466;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.search-form input[type="text"] {
+    width: 300px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.search-form button {
+    padding: 10px 16px;
+    background-color: #2c7be5;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-form button:hover {
+    background-color: #1a5cc7;
+}
+
+.browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.browse-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.browse-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.browse-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+    color: #003366;
+}
+
+.browse-card h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.browse-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.rate {
+    font-weight: bold;
+    color: #27ae60;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.rate-type {
+    color: #777;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+.snippet {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.empty {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    margin-top: 40px;
+}
+

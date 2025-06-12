@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Profile{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-image">
+            {% if user.customerprofile.avatar %}
+                <img src="{{ user.customerprofile.avatar.url }}" alt="Avatar">
+            {% else %}
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBtXMhA9YgKFX6BDZhcx9s21vHUQ-Z82T_Mg&s" alt="User Avatar">
+
+            {% endif %}
+        </div>
+        <div class="profile-details">
+            <h2>{{ user.username }}</h2>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.customerprofile.phone }}</p>
+            <p><strong>Address:</strong> {{ user.customerprofile.address }}</p>
+            <button onclick="toggleEditForm()" class="edit-btn">✏️ Edit Profile</button>
+        </div>
+    </div>
+
+    <div class="profile-form" id="edit-form" style="display: none;">
+        <h3>Edit Profile</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save-btn">💾 Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleEditForm() {
+    const form = document.getElementById("edit-form");
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+}
+</script>
+{% endblock %}

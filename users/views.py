@@ -7,6 +7,8 @@ from .forms import CustomerSignUpForm, ProviderSignUpForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 
+from .models import CustomerProfile, ProviderProfile
+from .forms import CustomerProfileForm, ProviderProfileForm
 
 def home(request):
     return render(request, 'home.html')
@@ -71,4 +73,30 @@ class CustomLoginView(LoginView):
             return '/dashboard/provider/'
         else:
             return '/'
+
+
+
+
+@login_required
+def customer_profile(request):
+    profile = request.user.customerprofile
+    if request.method == 'POST':
+        form = CustomerProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = CustomerProfileForm(instance=profile)
+    return render(request, 'users/customer_profile.html', {'form': form})
+
+@login_required
+def provider_profile(request):
+    profile = request.user.providerprofile
+    if request.method == 'POST':
+        form = ProviderProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProviderProfileForm(instance=profile)
+    return render(request, 'users/provider_profile.html', {'form': form})
+
 

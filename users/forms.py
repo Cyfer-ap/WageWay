@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
+from .models import CustomerProfile, ProviderProfile
+from django.forms import ModelForm
+
 
 class CustomerSignUpForm(UserCreationForm):
     class Meta:
@@ -25,3 +28,15 @@ class ProviderSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+
+class CustomerProfileForm(ModelForm):
+    class Meta:
+        model = CustomerProfile
+        fields = ['phone', 'address', 'avatar']
+
+class ProviderProfileForm(ModelForm):
+    class Meta:
+        model = ProviderProfile
+        fields = ['phone', 'address', 'avatar', 'service_type', 'experience_years']

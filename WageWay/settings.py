@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-v24sbkvw*8d@kjc&k%$0856zim
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 # ALLOWED HOSTS - allow everything or set Render URL in production
-ALLOWED_HOSTS = ['*']  # Replace with your render.com domain in production
+ALLOWED_HOSTS = ['*', 'https://wageway.onrender.com']  # Replace with your render.com domain in production
 
 # Application definition
 INSTALLED_APPS = [

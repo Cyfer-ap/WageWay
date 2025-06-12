@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Customer Bookings for My Services</h2>
+<ul>
+  {% for b in bookings %}
+    <li>{{ b.customer.username }} booked {{ b.service.title }} on {{ b.booking_date }} at {{ b.booking_time }} ({{ b.status }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

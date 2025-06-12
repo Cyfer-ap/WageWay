@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Bookings</h2>
+<ul>
+  {% for b in bookings %}
+    <li>{{ b.service.title }} on {{ b.booking_date }} at {{ b.booking_time }} ({{ b.status }})
+      {% if b.status == 'pending' or b.status == 'confirmed' %}
+        <a href="{% url 'cancel_booking' b.id %}">Cancel</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

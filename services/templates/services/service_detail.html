@@ -31,6 +31,12 @@
             <p><a href="{{ service.certification.url }}" target="_blank" class="cert-btn">📄 View Certification</a></p>
             {% endif %}
         </div>
+        {% if user.is_authenticated and user.role == 'customer' %}
+            <a href="{% url 'create_booking' service.id %}">🗓️ Book this Service</a>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a> as a customer to book this service.</p>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

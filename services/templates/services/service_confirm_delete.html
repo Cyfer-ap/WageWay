@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Service{% endblock %}
+
+{% block content %}
+<h2>🗑️ Confirm Delete</h2>
+
+<p>Are you sure you want to delete the service <strong>{{ service.title }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">✅ Yes, Delete</button>
+    <a href="{% url 'provider_services' %}">❌ Cancel</a>
+</form>
+{% endblock %}

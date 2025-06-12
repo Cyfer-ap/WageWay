@@ -1,0 +1,82 @@
+/* static/css/login.css */
+
+/* Fade-in slide animation */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    text-align: center;
+    color: #004466;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    animation: fadeSlideIn 0.6s ease-in-out;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    animation: fadeSlideIn 0.8s ease-in-out;
+}
+
+form p {
+    margin-bottom: 15px;
+    animation: fadeSlideIn 1s ease-in-out;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+    animation: fadeSlideIn 1s ease-in-out;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    animation: fadeSlideIn 1s ease-in-out;
+}
+
+form input:focus {
+    border-color: #0099cc;
+    box-shadow: 0 0 0 3px rgba(0, 153, 204, 0.2);
+    outline: none;
+}
+
+form button[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: #004466;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    animation: fadeSlideIn 1.2s ease-in-out;
+}
+
+form button[type="submit"]:hover {
+    background-color: #006699;
+    transform: scale(1.02);
+}

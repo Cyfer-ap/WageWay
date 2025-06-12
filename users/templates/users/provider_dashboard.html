@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Provider Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'users/css/provider_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>🔧 Provider Dashboard</h2>
+<p>Welcome {{ user.username }}!</p>
+<ul>
+    <li><a href="#">Manage Services</a></li>
+    <li><a href="#">Booking Requests</a></li>
+</ul>
+{% endblock %}

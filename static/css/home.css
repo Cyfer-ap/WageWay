@@ -1,0 +1,63 @@
+/* static/css/home.css */
+
+/* Animation */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #004466;
+    margin-bottom: 15px;
+    text-align: center;
+    animation: fadeSlideUp 0.6s ease-out;
+}
+
+p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+    animation: fadeSlideUp 0.8s ease-out;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    animation: fadeSlideUp 1s ease-out;
+}
+
+ul li {
+    background-color: #e6f7ff;
+    border-left: 5px solid #0099cc;
+    padding: 12px 18px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+ul li:hover {
+    transform: scale(1.02);
+    background-color: #d0efff;
+}
+
+ul li::before {
+    content: "✔️";
+    margin-right: 10px;
+    color: green;
+    font-size: 1.2rem;
+    animation: fadeSlideUp 1.2s ease-out;
+}

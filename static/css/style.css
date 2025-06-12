@@ -1,0 +1,92 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, ol, li, a, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #004466;
+    padding: 15px 30px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #cceeff;
+}
+
+nav form {
+    display: inline;
+}
+
+button {
+    font: inherit;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+button:hover {
+    color: #ffcccb;
+}
+
+/* Main Content */
+main {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #eeeeee;
+    color: #555;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav a, nav form {
+        margin: 8px 0;
+    }
+
+    main {
+        padding: 20px;
+    }
+}

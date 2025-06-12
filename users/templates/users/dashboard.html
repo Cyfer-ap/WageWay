@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Hello {{ user.username }}!</h2>
+
+{% if user.role == 'provider' %}
+    <p>👨‍🔧 This is your Provider Dashboard.</p>
+    <ul>
+        <li><a href="#">Add/Edit Services</a></li>
+        <li><a href="#">View Bookings</a></li>
+    </ul>
+{% elif user.role == 'customer' %}
+    <p>👨‍💼 This is your Customer Dashboard.</p>
+    <ul>
+        <li><a href="#">Search Services</a></li>
+        <li><a href="#">My Appointments</a></li>
+    </ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'users/css/customer_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>👤 Customer Dashboard</h2>
+<p>Welcome {{ user.username }}!</p>
+<ul>
+    <li><a href="#">Browse Services</a></li>
+    <li><a href="#">My Bookings</a></li>
+</ul>
+{% endblock %}

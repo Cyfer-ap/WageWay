@@ -4,7 +4,7 @@
 {% block title %}Customer Profile{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/customer_profile.css' %}">
 
 <div class="profile-container">
     <div class="profile-card">
@@ -13,14 +13,21 @@
                 <img src="{{ user.customerprofile.avatar.url }}" alt="Avatar">
             {% else %}
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBtXMhA9YgKFX6BDZhcx9s21vHUQ-Z82T_Mg&s" alt="User Avatar">
-
             {% endif %}
         </div>
         <div class="profile-details">
-            <h2>{{ user.username }}</h2>
+            <h2>{{ user.get_full_name }}</h2>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Phone:</strong> {{ user.customerprofile.phone }}</p>
             <p><strong>Address:</strong> {{ user.customerprofile.address }}</p>
+            <p><strong>Bio:</strong> {{ user.customerprofile.bio }}</p>
+            {% if user.customerprofile.facebook %}
+                <p><strong>Facebook:</strong> <a href="{{ user.customerprofile.facebook }}" target="_blank">View</a></p>
+            {% endif %}
+            {% if user.customerprofile.linkedin %}
+                <p><strong>LinkedIn:</strong> <a href="{{ user.customerprofile.linkedin }}" target="_blank">View</a></p>
+            {% endif %}
+{#            <a href="{% url 'password_change' %}" class="change-password">Change Password</a>#}
             <button onclick="toggleEditForm()" class="edit-btn">✏️ Edit Profile</button>
         </div>
     </div>

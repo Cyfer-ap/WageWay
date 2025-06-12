@@ -17,7 +17,11 @@
             <a href="/">🏠 Home</a>
 
             {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}">Dashboard</a>
+                {% if user.role == 'customer' %}
+                    <a href="{% url 'customer_dashboard' %}">Dashboard</a>
+                {% elif user.role == 'provider' %}
+                    <a href="{% url 'provider_dashboard' %}">Dashboard</a>
+                {% endif %}
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" style="background: none; border: none; color: blue; cursor: pointer; padding: 0; margin-left: 10px;">
@@ -29,6 +33,7 @@
                 <a href="{% url 'register_customer' %}">Register as Customer</a>
                 <a href="{% url 'register_provider' %}">Register as Provider</a>
             {% endif %}
+
         </nav>
     </header>
 

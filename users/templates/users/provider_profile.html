@@ -1,10 +1,59 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2>Provider Profile</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+{% load static %}
 
+{% block title %}Provider Profile{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'users/css/provider_profile.css' %}">
+
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-image">
+            {% if user.providerprofile.avatar %}
+                <img src="{{ user.providerprofile.avatar.url }}" alt="Avatar">
+            {% else %}
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBtXMhA9YgKFX6BDZhcx9s21vHUQ-Z82T_Mg&s" alt="User Avatar">
+            {% endif %}
+        </div>
+        <div class="profile-details">
+            <h2>{{ user.get_full_name }}</h2>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.providerprofile.phone }}</p>
+            <p><strong>Service Area:</strong> {{ user.providerprofile.address }}</p>
+            <p><strong>Service Type:</strong> {{ user.providerprofile.service_type }}</p>
+            <p><strong>Services:</strong> {{ user.providerprofile.services_offered }}</p>
+            <p><strong>Rate:</strong> ₹{{ user.providerprofile.hourly_rate }}</p>
+            <p><strong>Availability:</strong> {{ user.providerprofile.availability }}</p>
+            <p><strong>Experience:</strong> {{ user.providerprofile.experience_years }} years</p>
+            <p><strong>Description:</strong> {{ user.providerprofile.description }}</p>
+            {% if user.providerprofile.certification %}
+                <p><strong>Certifications:</strong> <a href="{{ user.providerprofile.certification.url }}" target="_blank">View</a></p>
+            {% endif %}
+            {% if user.providerprofile.facebook %}
+                <p><strong>Facebook:</strong> <a href="{{ user.providerprofile.facebook }}" target="_blank">View</a></p>
+            {% endif %}
+            {% if user.providerprofile.linkedin %}
+                <p><strong>LinkedIn:</strong> <a href="{{ user.providerprofile.linkedin }}" target="_blank">View</a></p>
+            {% endif %}
+{#            <a href="{% url 'password_change' %}" class="change-password">Change Password</a>#}
+            <button onclick="toggleEditForm()" class="edit-btn">✏️ Edit Profile</button>
+        </div>
+    </div>
+
+    <div class="profile-form" id="edit-form" style="display: none;">
+        <h3>Edit Profile</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save-btn">💾 Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleEditForm() {
+    const form = document.getElementById("edit-form");
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+}
+</script>
 {% endblock %}

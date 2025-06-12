@@ -34,9 +34,15 @@ class ProviderSignUpForm(UserCreationForm):
 class CustomerProfileForm(ModelForm):
     class Meta:
         model = CustomerProfile
-        fields = ['phone', 'address', 'avatar']
+        fields = ['phone', 'address', 'avatar', 'bio', 'facebook', 'linkedin']
+
 
 class ProviderProfileForm(ModelForm):
     class Meta:
         model = ProviderProfile
-        fields = ['phone', 'address', 'avatar', 'service_type', 'experience_years']
+        fields = [
+            'phone', 'address', 'avatar', 'service_type', 'services_offered',
+            'hourly_rate', 'availability', 'experience_years', 'description',
+            'certification', 'facebook', 'linkedin'
+        ]
+

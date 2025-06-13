@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Bookings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/my_bookings.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>My Bookings</h2>
-<ul>
-  {% for b in bookings %}
-    <li>{{ b.service.title }} on {{ b.booking_date }} at {{ b.booking_time }} ({{ b.status }})
-      {% if b.status == 'pending' or b.status == 'confirmed' %}
-        <a href="{% url 'cancel_booking' b.id %}">Cancel</a>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+<div class="bookings-container">
+    <h2>📋 My Bookings</h2>
+
+    {% if bookings %}
+    <div class="bookings-grid">
+        {% for b in bookings %}
+        <div class="booking-card">
+            <h3>{{ b.service.title }}</h3>
+            <p><strong>Date:</strong> {{ b.booking_date }} at {{ b.booking_time }}</p>
+            <p class="status {{ b.status|lower }}">Status: {{ b.status|capfirst }}</p>
+
+            <div class="booking-actions">
+                {% if b.status == 'pending' or b.status == 'confirmed' %}
+                <a href="{% url 'cancel_booking' b.id %}" class="cancel-btn">❌ Cancel</a>
+                {% endif %}
+                <a href="{% url 'conversation' user_id=b.service.provider.user.id %}" class="message-btn">💬 Message {{ b.service.provider.user.username }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">You have no bookings yet.</p>
+    {% endif %}
+</div>
 {% endblock %}

@@ -1,0 +1,98 @@
+/* bookings/css/provider_bookings.css */
+
+body {
+    background-color: #f9fbfd;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.provider-bookings-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.provider-bookings-container h2 {
+    font-size: 2rem;
+    color: #004466;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.booking-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+}
+
+.booking-card h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.booking-card p {
+    font-size: 0.95rem;
+    margin: 6px 0;
+    color: #444;
+}
+
+.status {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.status.pending {
+    color: #e67e22;
+}
+
+.status.confirmed {
+    color: #2ecc71;
+}
+
+.status.completed {
+    color: #3498db;
+}
+
+.status.cancelled {
+    color: #e74c3c;
+}
+
+.booking-actions {
+    margin-top: 15px;
+}
+
+.message-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #2c7be5;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.message-btn:hover {
+    background-color: #1a5cc7;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    margin-top: 50px;
+}

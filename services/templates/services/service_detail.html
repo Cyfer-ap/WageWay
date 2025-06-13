@@ -27,16 +27,18 @@
                 <li><strong>💰 Rate:</strong> ₹{{ service.rate }} ({{ service.get_rate_type_display }})</li>
             </ul>
 
-            {% if service.certification %}
-            <p><a href="{{ service.certification.url }}" target="_blank" class="cert-btn">📄 View Certification</a></p>
-            {% endif %}
-        </div>
-        {% if user.is_authenticated and user.role == 'customer' %}
-            <a href="{% url 'create_booking' service.id %}">🗓️ Book this Service</a>
-        {% else %}
-            <p><a href="{% url 'login' %}">Login</a> as a customer to book this service.</p>
-        {% endif %}
+            <div class="action-buttons">
+                {% if service.certification %}
+                    <a href="{{ service.certification.url }}" target="_blank" class="cert-btn">📄 View Certification</a>
+                {% endif %}
 
+                {% if user.is_authenticated and user.role == 'customer' %}
+                    <a href="{% url 'create_booking' service.id %}" class="book-btn">🗓️ Book this Service</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="book-btn" style="background-color: #6c757d;">🔐 Login to Book</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

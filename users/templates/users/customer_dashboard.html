@@ -10,11 +10,10 @@
 {% block content %}
 <h2>👤 Customer Dashboard</h2>
 <p>Welcome {{ user.username }}!</p>
-<p>👨‍💼 This is your Customer Dashboard.</p>
 <ul>
     <li><a href="{% url 'service_browse' %}">🔍 Browse Services</a></li>
     <li><a href="{% url 'my_bookings' %}">📋 My Bookings</a></li>
     <li><a href="{% url 'customer_profile' %}">👤 Edit My Profile</a></li>
+    <li><a href="{% url 'inbox' %}">📨 My Inbox</a></li>
 </ul>
-
 {% endblock %}

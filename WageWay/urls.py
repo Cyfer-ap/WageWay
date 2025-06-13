@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include('users.urls')),
     path('services/', include('services.urls')),
     path('bookings/', include('bookings.urls')),
+    path('messages/', include('notifications.urls')),
+
 
 ]
 if settings.DEBUG:

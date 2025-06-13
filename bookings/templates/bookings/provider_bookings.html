@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Bookings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/provider_bookings.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Customer Bookings for My Services</h2>
-<ul>
-  {% for b in bookings %}
-    <li>{{ b.customer.username }} booked {{ b.service.title }} on {{ b.booking_date }} at {{ b.booking_time }} ({{ b.status }})</li>
-  {% endfor %}
-</ul>
+<div class="provider-bookings-container">
+    <h2>📌 Customer Bookings for My Services</h2>
+
+    {% if bookings %}
+    <div class="bookings-grid">
+        {% for b in bookings %}
+        <div class="booking-card">
+            <h3>{{ b.customer.username }}</h3>
+            <p><strong>Service:</strong> {{ b.service.title }}</p>
+            <p><strong>Date:</strong> {{ b.booking_date }} at {{ b.booking_time }}</p>
+            <p class="status {{ b.status|lower }}">Status: {{ b.status|capfirst }}</p>
+
+            {% if b.customer %}
+            <div class="booking-actions">
+                <a href="{% url 'conversation' user_id=b.customer.id %}" class="message-btn">💬 Message {{ b.customer.username }}</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">You don’t have any bookings yet.</p>
+    {% endif %}
+</div>
 {% endblock %}

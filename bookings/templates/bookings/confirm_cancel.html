@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cancel Booking{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/booking_cancel_confirm.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Cancel Booking</h2>
-<p>Are you sure you want to cancel your booking for {{ booking.service.title }}?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, Cancel</button>
-    <a href="{% url 'my_bookings' %}">No, Go Back</a>
-</form>
+<div class="cancel-container">
+    <div class="cancel-card">
+        <h2>⚠️ Cancel Booking</h2>
+        <p>Are you sure you want to cancel your booking for <strong>{{ booking.service.title }}</strong>?</p>
+
+        <form method="post" class="cancel-form">
+            {% csrf_token %}
+            <button type="submit" class="cancel-btn">✅ Yes, Cancel</button>
+            <a href="{% url 'my_bookings' %}" class="go-back-btn">❌ No, Go Back</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

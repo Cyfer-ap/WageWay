@@ -4,24 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Wage Way{% endblock %}</title>
-
-    <!-- Global CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    <!-- Page-specific CSS -->
     {% block styles %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
             <a href="/">🏠 Home</a>
-
             {% if user.is_authenticated %}
                 {% if user.role == 'customer' %}
                     <a href="{% url 'customer_dashboard' %}">Dashboard</a>
                 {% elif user.role == 'provider' %}
                     <a href="{% url 'provider_dashboard' %}">Dashboard</a>
                 {% endif %}
+                <a href="{% url 'inbox' %}">📨 Inbox</a>
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" style="background: none; border: none; color: blue; cursor: pointer; padding: 0; margin-left: 10px;">
@@ -33,7 +29,6 @@
                 <a href="{% url 'register_customer' %}">Register as Customer</a>
                 <a href="{% url 'register_provider' %}">Register as Provider</a>
             {% endif %}
-
         </nav>
     </header>
 
@@ -44,14 +39,13 @@
     <footer>
         <p>&copy; 2025 Wage Way. All rights reserved.</p>
     </footer>
-</body>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ8VF0Q43C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-CZ8VF0Q43C');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ8VF0Q43C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CZ8VF0Q43C');
+    </script>
+</body>
 </html>

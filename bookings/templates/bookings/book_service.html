@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book {{ service.title }}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/service_booking.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Book {{ service.title }}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Now</button>
-</form>
+<div class="booking-container">
+    <div class="booking-card">
+        <h2>📅 Book <span>{{ service.title }}</span></h2>
+
+        <form method="post" class="booking-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="book-btn">🚀 Book Now</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

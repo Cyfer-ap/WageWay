@@ -68,9 +68,13 @@ WSGI_APPLICATION = 'WageWay.wsgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer'  # Redis recommended for prod
-    }
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL')],
+        },
+    },
 }
+
 
 
 # Database: SQLite (for demo/development)

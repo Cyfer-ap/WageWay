@@ -75,7 +75,9 @@ CHANNEL_LAYERS = {
     },
 }
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://wageway.onrender.com',
+]
 
 # Database: SQLite (for demo/development)
 DATABASES = {

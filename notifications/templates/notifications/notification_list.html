@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>🔔 Notifications</h2>
+<ul>
+  {% for note in notifications %}
+    <li>
+      {{ note.message }}
+      {% if note.url %}
+        – <a href="{{ note.url }}">View</a>
+      {% endif %}
+      <small style="color:gray;">({{ note.created_at|timesince }} ago)</small>
+    </li>
+  {% empty %}
+    <li>No notifications.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -15,5 +15,11 @@
     <li><a href="{% url 'my_bookings' %}">📋 My Bookings</a></li>
     <li><a href="{% url 'customer_profile' %}">👤 Edit My Profile</a></li>
     <li><a href="{% url 'inbox' %}">📨 My Inbox</a></li>
+    <li><a href="{% url 'notifications' %}">
+        🔔 Notifications
+        {% if unread_count > 0 %}
+            <span style="color: red;">({{ unread_count }})</span>
+        {% endif %}
+    </a></li>
 </ul>
 {% endblock %}

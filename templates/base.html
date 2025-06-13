@@ -24,6 +24,14 @@
                         Logout
                     </button>
                 </form>
+                <a href="{% url 'notifications' %}">
+                    🔔 Notifications
+                    {% if unread_count > 0 %}
+                        <span style="color: red;">({{ unread_count }})</span>
+                    {% endif %}
+                </a>
+
+
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register_customer' %}">Register as Customer</a>

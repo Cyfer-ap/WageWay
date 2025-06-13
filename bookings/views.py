@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
 from .models import Booking
 from .forms import BookingForm
 from services.models import Service
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import datetime
+from notifications.models import Notification
 
 @login_required
 def create_booking(request, service_id):
@@ -27,6 +30,18 @@ def create_booking(request, service_id):
                 form.add_error(None, "This slot is already booked.")
             else:
                 booking.save()
+                Notification.objects.create(
+                    user=service.provider.user,
+                    message=f"{request.user.username} booked your service '{service.title}' on {booking.booking_date} at {booking.booking_time}",
+                    url=reverse('provider_bookings')
+                )
+
+                # Notify Customer
+                Notification.objects.create(
+                    user=request.user,
+                    message=f"You successfully booked '{service.title}' with {service.provider.user.username} on {booking.booking_date} at {booking.booking_time}.",
+                    url=reverse('my_bookings')
+                )
                 return redirect('my_bookings')
     else:
         form = BookingForm()
@@ -48,5 +63,19 @@ def cancel_booking(request, booking_id):
     if request.method == 'POST':
         booking.status = 'cancelled'
         booking.save()
+        # Notify Provider
+        Notification.objects.create(
+            user=booking.service.provider.user,
+            message=f"{request.user.username} cancelled the booking for '{booking.service.title}' on {booking.booking_date}.",
+            url=reverse('provider_bookings')
+        )
+
+        # Notify Customer (i.e. yourself)
+        Notification.objects.create(
+            user=request.user,
+            message=f"You cancelled your booking for '{booking.service.title}' with {booking.service.provider.user.username} on {booking.booking_date}.",
+            url=reverse('my_bookings')
+        )
+
         return redirect('my_bookings')
     return render(request, 'bookings/confirm_cancel.html', {'booking': booking})

@@ -11,6 +11,7 @@ urlpatterns = [
     path('services/', include('services.urls')),
     path('bookings/', include('bookings.urls')),
     path('messages/', include('notifications.urls')),
+    path('notifications/', include('notifications.urls')),
 
 
 ]

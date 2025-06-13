@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from users.utils import is_user_online
 from .models import Message
 from .forms import MessageForm
 from users.models import User
@@ -16,13 +18,20 @@ def inbox(request):
     return render(request, 'notifications/inbox.html', {'conversations': conversations})
 
 
+
+
 @login_required
 def conversation(request, user_id):
     other_user = get_object_or_404(User, id=user_id)
+
+    # Fetch conversation messages
     messages = Message.objects.filter(
         Q(sender=request.user, receiver=other_user) |
         Q(sender=other_user, receiver=request.user)
     ).order_by('timestamp')
+
+    # Mark unread messages as seen
+    Message.objects.filter(sender=other_user, receiver=request.user, is_read=False).update(is_read=True, status='seen')
 
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -30,6 +39,7 @@ def conversation(request, user_id):
             msg = form.save(commit=False)
             msg.sender = request.user
             msg.receiver = other_user
+            msg.status = 'sent'
             msg.save()
             return redirect('conversation', user_id=other_user.id)
     else:
@@ -38,8 +48,10 @@ def conversation(request, user_id):
     return render(request, 'notifications/conversation.html', {
         'form': form,
         'messages': messages,
-        'other_user': other_user
+        'other_user': other_user,
+        'is_online': is_user_online(other_user),
     })
+
 
 
 

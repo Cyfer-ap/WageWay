@@ -3,3 +3,4 @@ gunicorn
 whitenoise
 Pillow
 channels~=4.2.2
+asgiref~=3.8.1

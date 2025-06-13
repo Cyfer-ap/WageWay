@@ -23,10 +23,20 @@
         {% endfor %}
     </div>
 
-    <form method="post" class="chat-form">
+    <p id="typing-status" class="typing-indicator"></p>
+
+    <form id="chat-form" method="post" class="chat-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="send-btn">📨 Send</button>
     </form>
 </div>
+
+<script>
+    const chatConfig = {
+        otherUserId: "{{ other_user.id }}",
+        currentUsername: "{{ user.username }}"
+    };
+</script>
+<script src="{% static 'messaging/js/conversation.js' %}"></script>
 {% endblock %}

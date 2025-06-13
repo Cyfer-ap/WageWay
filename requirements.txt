@@ -2,3 +2,4 @@ Django~=5.1.7
 gunicorn
 whitenoise
 Pillow
+channels~=4.2.2

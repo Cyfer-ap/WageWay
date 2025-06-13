@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'notifications',
 ]
 
+INSTALLED_APPS += ['channels']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Added for static files
@@ -54,12 +57,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.unread_message_count',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'WageWay.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'  # Redis recommended for prod
+    }
+}
+
 
 # Database: SQLite (for demo/development)
 DATABASES = {

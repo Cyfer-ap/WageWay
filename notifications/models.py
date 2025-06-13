@@ -8,6 +8,12 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
 
+    STATUS_CHOICES = [
+        ('sent', 'Sent'),
+        ('delivered', 'Delivered'),
+        ('seen', 'Seen'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='sent')
     class Meta:
         ordering = ['-timestamp']
 

@@ -17,7 +17,7 @@
                 {% elif user.role == 'provider' %}
                     <a href="{% url 'provider_dashboard' %}">Dashboard</a>
                 {% endif %}
-                <a href="{% url 'inbox' %}">📨 Inbox</a>
+                <a href="{% url 'inbox' %}">📨 Inbox{% if unread_count > 0 %} <span style="color:red;">({{ unread_count }})</span>{% endif %}</a>
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" style="background: none; border: none; color: blue; cursor: pointer; padding: 0; margin-left: 10px;">

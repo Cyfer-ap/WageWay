@@ -19,4 +19,9 @@ services:
         generateValue: true
       - key: DEBUG
         value: 'True'
+      - key: REDIS_URL
+        fromService:
+          name: wageway-redis
+          key: REDIS_URL
+
     autoDeploy: true

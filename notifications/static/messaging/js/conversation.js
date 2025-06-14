@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
     const socket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat/' + chatConfig.otherUserId + '/'
+        wsScheme + '://' + window.location.host + '/ws/chat/' + chatConfig.otherUserId + '/'
     );
+
 
     const chatBox = document.getElementById('chat-box');
     const chatForm = document.getElementById('chat-form');

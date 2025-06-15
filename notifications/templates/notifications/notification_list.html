@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>🔔 Notifications</h2>
-<ul>
-  {% for note in notifications %}
-    <li>
-      {{ note.message }}
-      {% if note.url %}
-        – <a href="{{ note.url }}">View</a>
-      {% endif %}
-      <small style="color:gray;">({{ note.created_at|timesince }} ago)</small>
-    </li>
-  {% empty %}
-    <li>No notifications.</li>
-  {% endfor %}
-</ul>
+<div class="notifications-container">
+    <h2>🔔 Notifications</h2>
+    <ul class="notification-list">
+      {% for note in notifications %}
+        <li class="notification-item">
+          <div class="message">
+            {{ note.message }}
+            {% if note.url %}
+              – <a href="{{ note.url }}" class="view-link">View</a>
+            {% endif %}
+          </div>
+          <small class="timestamp">🕒 {{ note.created_at|timesince }} ago</small>
+        </li>
+      {% empty %}
+        <li class="notification-item empty">No notifications.</li>
+      {% endfor %}
+    </ul>
+</div>
 {% endblock %}

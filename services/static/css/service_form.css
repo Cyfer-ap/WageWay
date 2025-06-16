@@ -1,82 +1,148 @@
-/* services/css/service_form.js.css */
-
+/* General Reset and Background */
 body {
-    background-color: #f8fbfd;
+    background: linear-gradient(to right, #e8f4fd, #f9fdfc);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
+/* Container Styling */
 .form-container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 30px;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
 }
 
 .form-container h2 {
-    font-size: 1.8rem;
-    color: #004466;
-    margin-bottom: 25px;
+    font-size: 2.2rem;
+    color: #004d66;
+    margin-bottom: 30px;
     text-align: center;
 }
 
+/* Form Base */
 .service-form {
     display: flex;
     flex-direction: column;
+    gap: 22px;
 }
 
-.service-form p {
-    margin-bottom: 20px;
-}
-
+/* Label Styling */
 .service-form label {
     font-weight: 600;
     margin-bottom: 6px;
-    color: #333;
-    display: block;
+    color: #004466;
+    font-size: 1rem;
 }
 
-.service-form input,
-.service-form select,
-.service-form textarea {
+/* Input & Select Styling */
+.service-form input[type="text"],
+.service-form input[type="email"],
+.service-form input[type="date"],
+.service-form input[type="file"],
+.service-form input[type="time"],
+.service-form input[type="number"],
+.service-form textarea,
+.service-form select {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 14px;
+    border: 1.5px solid #ccd9e0;
+    border-radius: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #fdfdfd;
-    transition: border-color 0.3s ease;
+    background-color: #fefefe;
+    transition: border-color 0.3s ease, box-shadow 0.2s ease;
 }
 
 .service-form input:focus,
-.service-form select:focus,
-.service-form textarea:focus {
+.service-form textarea:focus,
+.service-form select:focus {
     border-color: #2c7be5;
+    box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.2);
 }
 
+/* Grouped Sections */
+#oneTimeFields,
+#recurringFields,
+#customCategoryWrapper {
+    background-color: #f5faff;
+    border-left: 4px solid #2c7be5;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-top: -10px;
+}
+
+/* Payment & Radio Groups */
+.checkbox-group,
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* File Inputs */
+input[type="file"] {
+    background-color: #f0f0f0;
+}
+
+/* Submit Button */
 .submit-btn {
-    margin-top: 25px;
-    padding: 12px 0;
+    padding: 14px 24px;
+    background-color: #28a745;
+    color: white;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: #2c7be5;
-    color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .submit-btn:hover {
-    background-color: #1a5cc7;
+    background-color: #218838;
+    transform: translateY(-2px);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* Section Divider */
+.service-form hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin: 30px 0 10px 0;
+}
+
+/* Optional Custom Classes */
+.highlight-label {
+    color: #ff6f00;
+    font-weight: 700;
+}
+
+.optional-note {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* Error Message (Django default class) */
+.errorlist {
+    color: #d9534f;
+    font-size: 0.95rem;
+    list-style-type: square;
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     .form-container {
-        padding: 20px;
+        padding: 25px 20px;
+    }
+
+    .submit-btn {
+        width: 100%;
     }
 }

@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-
 from .forms import CustomerSignUpForm, ProviderSignUpForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-
-from .models import CustomerProfile, ProviderProfile
+from .models import User
 from .forms import CustomerProfileForm, ProviderProfileForm
 
 def home(request):
@@ -75,8 +73,6 @@ class CustomLoginView(LoginView):
             return '/'
 
 
-
-
 @login_required
 def customer_profile(request):
     profile = request.user.customerprofile
@@ -87,6 +83,7 @@ def customer_profile(request):
     else:
         form = CustomerProfileForm(instance=profile)
     return render(request, 'users/customer_profile.html', {'form': form})
+
 
 @login_required
 def provider_profile(request):
@@ -99,4 +96,15 @@ def provider_profile(request):
         form = ProviderProfileForm(instance=profile)
     return render(request, 'users/provider_profile.html', {'form': form})
 
+
+def public_provider_profile(request):
+    user_id = request.GET.get('id')
+    user = get_object_or_404(User, id=user_id, role='provider')
+    profile = getattr(user, 'providerprofile', None)
+    if not profile:
+        return render(request, 'users/provider_not_found.html', {'user': user})
+    return render(request, 'users/public_provider_profile.html', {
+        'user': user,
+        'profile': profile
+    })
 

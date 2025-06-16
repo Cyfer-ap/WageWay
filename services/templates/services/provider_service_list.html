@@ -22,8 +22,24 @@
                 <h3>{{ s.title }}</h3>
                 <span class="price">₹{{ s.rate }} <small>({{ s.get_rate_type_display }})</small></span>
             </div>
+
+            <p><strong>Category:</strong> {{ s.display_category }}</p>
             <p class="description">{{ s.description|truncatechars:150 }}</p>
-            <p class="category">Category: {{ s.category }}</p>
+            <p><strong>Job Type:</strong> {{ s.get_job_type_display }}</p>
+
+            {% if s.job_type == 'one_time' %}
+                <p><strong>📅 Date:</strong> {{ s.job_date }}</p>
+            {% else %}
+                <p><strong>📅 Days:</strong> {{ s.available_days }}</p>
+            {% endif %}
+
+            <p><strong>⏰ Time:</strong> {{ s.from_time }} - {{ s.to_time }}</p>
+            <p><strong>📍 Location:</strong> {{ s.verified_location }}</p>
+            <p><strong>☎ Contact:</strong> {{ s.contact_phone }} | {{ s.contact_email }}</p>
+            <p><strong>💳 Payments:</strong> {{ s.accepted_payments }}</p>
+            <p><strong>📖 Requirements:</strong> {{ s.requirements }}</p>
+            <p><strong>⛔ Cancellation Policy:</strong> {{ s.get_cancellation_policy_display }}</p>
+
             <div class="card-actions">
                 <a href="{% url 'service_update' s.pk %}" class="edit-btn">✏️ Edit</a>
                 <a href="{% url 'service_delete' s.pk %}" class="delete-btn">🗑️ Delete</a>

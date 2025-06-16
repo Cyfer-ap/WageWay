@@ -92,5 +92,13 @@ class Service(models.Model):
     def display_category(self):
         return self.custom_category if self.category == 'Other' else self.category
 
+    def get_available_days_display(self):
+        day_dict = dict(self._meta.get_field('available_days').choices)
+        return ', '.join(day_dict[day] for day in self.available_days)
+
+    def get_accepted_payments_display(self):
+        payment_dict = dict(self._meta.get_field('accepted_payments').choices)
+        return ', '.join(payment_dict[method] for method in self.accepted_payments)
+
     def __str__(self):
         return f"{self.title} - {self.provider.user.username}"

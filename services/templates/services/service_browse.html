@@ -23,6 +23,13 @@
             <h3><a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a></h3>
             <p class="rate">₹{{ service.rate }} <span class="rate-type">({{ service.get_rate_type_display }})</span></p>
             <p class="snippet">{{ service.description|truncatewords:20 }}</p>
+            <p><strong>📍 Location:</strong> {{ service.verified_location }}</p>
+            {% if service.job_type == 'one_time' %}
+                <p><strong>📅 Date:</strong> {{ service.job_date }}</p>
+            {% else %}
+                <li><strong>📅 Days:</strong> {{ service.get_available_days_display }}</li>
+            {% endif %}
+            <p><strong>⏰ Time:</strong> {{ service.from_time }} - {{ service.to_time }}</p>
         </div>
         {% endfor %}
     </div>

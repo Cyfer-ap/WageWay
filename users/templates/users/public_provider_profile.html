@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>👤 Provider: {{ user.username }}</h2>
+
+{% if profile.avatar %}
+    <img src="{{ profile.avatar.url }}" alt="Provider Avatar" width="150">
+{% endif %}
+
+<ul>
+    <li><strong>📍 Location:</strong> {{ profile.address }}</li>
+    <li><strong>☎ Contact:</strong> {{ user.email }}</li>
+    <li><strong>📞 Phone:</strong> {{ profile.phone }}</li>
+    <li><strong>🛠️ Service Type:</strong> {{ profile.service_type }}</li>
+    <li><strong>📅 Experience:</strong> {{ profile.experience_years }} years</li>
+</ul>
+{% endblock %}

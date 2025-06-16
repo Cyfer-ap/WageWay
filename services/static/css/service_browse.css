@@ -1,76 +1,98 @@
-/* services/css/service_browse.css */
-
+/* Global Styling */
 body {
-    background-color: #f9fbfc;
-}
-
-.browse-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
+    background: linear-gradient(to right, #f2f9ff, #eef7fb);
     font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+/* Container */
+.browse-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+/* Title */
 .browse-container h2 {
-    font-size: 2rem;
-    color: #004466;
-    margin-bottom: 20px;
+    font-size: 2.3rem;
+    color: #002e4d;
     text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
 }
 
+/* Search Form */
 .search-form {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
 }
 
 .search-form input[type="text"] {
-    width: 300px;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    width: 320px;
+    padding: 12px 14px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
     font-size: 1rem;
+    background-color: #ffffff;
+    transition: border 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    outline: none;
+    border-color: #2c7be5;
 }
 
 .search-form button {
-    padding: 10px 16px;
+    padding: 12px 20px;
     background-color: #2c7be5;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .search-form button:hover {
     background-color: #1a5cc7;
+    transform: translateY(-1px);
 }
 
+/* Service Grid */
 .browse-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 30px;
+    padding: 0 10px;
 }
 
+/* Service Cards */
 .browse-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .browse-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .browse-card h3 {
-    margin: 0 0 10px;
-    font-size: 1.25rem;
+    margin: 0;
+    font-size: 1.3rem;
     color: #003366;
+    font-weight: 700;
 }
 
 .browse-card h3 a {
@@ -80,31 +102,60 @@ body {
 
 .browse-card h3 a:hover {
     text-decoration: underline;
+    color: #005999;
 }
 
 .rate {
     font-weight: bold;
     color: #27ae60;
-    font-size: 1rem;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
 }
 
 .rate-type {
-    color: #777;
+    color: #888;
     font-weight: normal;
     font-size: 0.9rem;
 }
 
+/* Description Snippet */
 .snippet {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-top: 5px;
+}
+
+/* Other Meta Info */
+.browse-card p {
+    margin: 4px 0;
     font-size: 0.95rem;
-    color: #555;
-    line-height: 1.5;
+    color: #333;
 }
 
 .empty {
     text-align: center;
     color: #999;
     font-style: italic;
-    margin-top: 40px;
+    margin-top: 50px;
+    font-size: 1.1rem;
 }
 
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-form input[type="text"] {
+        width: 90%;
+    }
+
+    .browse-container {
+        padding: 15px;
+    }
+
+    .browse-grid {
+        gap: 20px;
+    }
+}

@@ -18,13 +18,22 @@
 
         <div class="info-box">
             <h2>{{ service.title }}</h2>
-            <p class="category">📁 <strong>Category:</strong> {{ service.category }}</p>
+            <p class="category">📁 <strong>Category:</strong> {{ service.display_category }}</p>
             <p class="description">{{ service.description }}</p>
 
             <ul class="meta-info">
-                <li><strong>📍 Area:</strong> {{ service.service_area }}</li>
-                <li><strong>📅 Available:</strong> {{ service.available_days }} @ {{ service.availability_time }}</li>
+                <li><strong>📍 Area:</strong> {{ service.verified_location }}</li>
+                {% if service.job_type == 'one_time' %}
+                    <li><strong>📅 Date:</strong> {{ service.job_date }}</li>
+                {% else %}
+                    <li><strong>📅 Days:</strong> {{ service.get_available_days_display }}</li>
+                {% endif %}
+                <li><strong>⏰ Time:</strong> {{ service.from_time }} – {{ service.to_time }}</li>
                 <li><strong>💰 Rate:</strong> ₹{{ service.rate }} ({{ service.get_rate_type_display }})</li>
+                <li><strong>💳 Payments:</strong> {{ service.get_accepted_payments_display }}</li>
+                <li><strong>☎ Contact:</strong> {{ service.contact_phone }} | {{ service.contact_email }}</li>
+                <li><strong>📖 Requirements:</strong> {{ service.requirements }}</li>
+                <li><strong>⛔ Cancellation Policy:</strong> {{ service.get_cancellation_policy_display }}</li>
             </ul>
 
             <div class="action-buttons">
@@ -34,11 +43,22 @@
 
                 {% if user.is_authenticated and user.role == 'customer' %}
                     <a href="{% url 'create_booking' service.id %}" class="book-btn">🗓️ Book this Service</a>
+                    <a href="{% url 'conversation' service.provider.user.id %}" class="msg-btn">💬 Message Provider</a>
                 {% else %}
                     <a href="{% url 'login' %}" class="book-btn" style="background-color: #6c757d;">🔐 Login to Book</a>
                 {% endif %}
+            </div>
+
+            <!-- Link to Provider Profile -->
+            <div class="provider-info">
+                <p>👨‍🔧 View Provider:
+                    <a href="{% url 'public_provider_profile' %}?id={{ service.provider.user.id }}">
+                        {{ service.provider.user.username }}
+                    </a>
+                </p>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+

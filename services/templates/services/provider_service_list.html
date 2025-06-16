@@ -30,13 +30,13 @@
             {% if s.job_type == 'one_time' %}
                 <p><strong>📅 Date:</strong> {{ s.job_date }}</p>
             {% else %}
-                <p><strong>📅 Days:</strong> {{ s.available_days }}</p>
+                <li><strong>📅 Days:</strong> {{ service.get_available_days_display }}</li>
             {% endif %}
 
             <p><strong>⏰ Time:</strong> {{ s.from_time }} - {{ s.to_time }}</p>
             <p><strong>📍 Location:</strong> {{ s.verified_location }}</p>
             <p><strong>☎ Contact:</strong> {{ s.contact_phone }} | {{ s.contact_email }}</p>
-            <p><strong>💳 Payments:</strong> {{ s.accepted_payments }}</p>
+            <li><strong>💳 Payments:</strong> {{ service.get_accepted_payments_display }}</li>
             <p><strong>📖 Requirements:</strong> {{ s.requirements }}</p>
             <p><strong>⛔ Cancellation Policy:</strong> {{ s.get_cancellation_policy_display }}</p>
 

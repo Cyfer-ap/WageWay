@@ -18,13 +18,27 @@
             <h3>{{ b.customer.username }}</h3>
             <p><strong>Service:</strong> {{ b.service.title }}</p>
             <p><strong>Date:</strong> {{ b.booking_date }} at {{ b.booking_time }}</p>
-            <p class="status {{ b.status|lower }}">Status: {{ b.status|capfirst }}</p>
+            <p><strong>Status:</strong> {{ b.status|capfirst }} ({{ b.provider_response|capfirst }})</p>
 
-            {% if b.customer %}
+            <p><strong>Urgent:</strong> {{ b.urgent|yesno:"Yes,No" }}</p>
+            <p><strong>Issue:</strong> {{ b.issue_description }}</p>
+            <p><strong>Material Provided:</strong> {{ b.material_available|yesno:"Yes,No" }}</p>
+            <p><strong>Payment Method:</strong> {{ b.get_preferred_payment_display }}</p>
+            <p><strong>Special Instructions:</strong> {{ b.special_instructions }}</p>
+
+            {% if b.provider_response == 'waiting' %}
             <div class="booking-actions">
-                <a href="{% url 'conversation' user_id=b.customer.id %}" class="message-btn">💬 Message {{ b.customer.username }}</a>
+                <form method="post" action="{% url 'accept_booking' b.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="accept-btn">✅ Accept</button>
+                </form>
+                <form method="post" action="{% url 'reject_booking' b.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="reject-btn">❌ Reject</button>
+                </form>
             </div>
             {% endif %}
+            <a href="{% url 'conversation' user_id=b.customer.id %}" class="message-btn">💬 Message {{ b.customer.username }}</a>
         </div>
         {% endfor %}
     </div>

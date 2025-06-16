@@ -1,98 +1,179 @@
-/* bookings/css/provider_bookings.css */
-
+/* Base Styles */
 body {
-    background-color: #f9fbfd;
+    background: linear-gradient(to right, #eef7fb, #fdfefe);
     font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
+/* Container */
 .provider-bookings-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
 .provider-bookings-container h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #004466;
-    margin-bottom: 30px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
+/* Grid Layout */
 .bookings-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
+/* Booking Card */
 .booking-card {
     background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
+    border: 1px solid #dbe6f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .booking-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
 }
 
 .booking-card h3 {
-    font-size: 1.2rem;
-    color: #2c3e50;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: #003366;
+    margin-bottom: 12px;
 }
 
 .booking-card p {
-    font-size: 0.95rem;
-    margin: 6px 0;
+    font-size: 1rem;
     color: #444;
+    margin: 5px 0;
 }
 
+/* Status Badge */
 .status {
     font-weight: bold;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
     margin-top: 10px;
+    width: fit-content;
 }
 
 .status.pending {
+    background-color: #fff4e5;
     color: #e67e22;
 }
 
 .status.confirmed {
-    color: #2ecc71;
+    background-color: #eafaf1;
+    color: #27ae60;
 }
 
 .status.completed {
+    background-color: #e6f2fb;
     color: #3498db;
 }
 
 .status.cancelled {
-    color: #e74c3c;
+    background-color: #fdecea;
+    color: #c0392b;
 }
 
+/* Action Buttons */
 .booking-actions {
     margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
+.accept-btn,
+.reject-btn,
 .message-btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Accept Button */
+.accept-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+/* Reject Button */
+.reject-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.reject-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+/* Message Button */
+.message-btn {
     background-color: #2c7be5;
     color: white;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .message-btn:hover {
     background-color: #1a5cc7;
+    transform: translateY(-1px);
 }
 
+/* Empty State */
 .empty {
     text-align: center;
     color: #888;
     font-style: italic;
-    margin-top: 50px;
+    font-size: 1.1rem;
+    margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .provider-bookings-container {
+        padding: 20px;
+    }
+
+    .bookings-grid {
+        gap: 20px;
+    }
+
+    .booking-actions {
+        flex-direction: column;
+    }
+
+    .accept-btn,
+    .reject-btn,
+    .message-btn {
+        width: 100%;
+        text-align: center;
+    }
 }

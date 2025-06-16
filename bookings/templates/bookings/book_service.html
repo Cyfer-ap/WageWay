@@ -14,7 +14,30 @@
 
         <form method="post" class="booking-form">
             {% csrf_token %}
-            {{ form.as_p }}
+            <label>Date:</label>
+            {{ form.booking_date }}
+
+            <label>Time:</label>
+            {{ form.booking_time }}
+
+            <label>{{ form.urgent.label }}</label>
+            {{ form.urgent }}
+
+            <label>{{ form.issue_description.label }}</label>
+            {{ form.issue_description }}
+
+            <label>{{ form.material_available.label }}</label>
+            {{ form.material_available }}
+
+            <label>{{ form.preferred_payment.label }}</label>
+            {{ form.preferred_payment }}
+
+            <label>{{ form.special_instructions.label }}</label>
+            {{ form.special_instructions }}
+
+            <label>{{ form.agreed }}</label>
+            {{ form.agreed.label }}
+
             <button type="submit" class="book-btn">🚀 Book Now</button>
         </form>
     </div>

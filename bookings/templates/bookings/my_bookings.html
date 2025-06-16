@@ -17,13 +17,18 @@
         <div class="booking-card">
             <h3>{{ b.service.title }}</h3>
             <p><strong>Date:</strong> {{ b.booking_date }} at {{ b.booking_time }}</p>
-            <p class="status {{ b.status|lower }}">Status: {{ b.status|capfirst }}</p>
+            <p class="status {{ b.status|lower }}">Status: {{ b.status|capfirst }} ({{ b.provider_response|capfirst }})</p>
 
             <div class="booking-actions">
                 {% if b.status == 'pending' or b.status == 'confirmed' %}
                 <a href="{% url 'cancel_booking' b.id %}" class="cancel-btn">❌ Cancel</a>
                 {% endif %}
+
                 <a href="{% url 'conversation' user_id=b.service.provider.user.id %}" class="message-btn">💬 Message {{ b.service.provider.user.username }}</a>
+
+                {% if b.can_be_paid %}
+                <a href="#" class="pay-btn">💰 Pay</a> <!-- Replace with your payment gateway URL -->
+                {% endif %}
             </div>
         </div>
         {% endfor %}

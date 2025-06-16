@@ -6,3 +6,4 @@ channels~=4.2.2
 asgiref~=3.8.1
 daphne
 channels_redis
+django-multiselectfield

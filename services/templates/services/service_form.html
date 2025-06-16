@@ -10,10 +10,75 @@
 {% block content %}
 <div class="form-container">
     <h2>{% if form.instance.pk %}✏️ Edit{% else %}➕ Add{% endif %} Service</h2>
-    <form method="post" enctype="multipart/form-data" class="service-form">
+
+    <form method="post" enctype="multipart/form-data" class="service-form" id="serviceForm">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <!-- Category Dropdown -->
+        <label for="id_category">Category:</label>
+        {{ form.category }}
+        <div id="customCategoryWrapper" style="display: none;">
+            <label for="id_custom_category">Other Category:</label>
+            {{ form.custom_category }}
+        </div>
+
+        <!-- Title, Description -->
+        {{ form.title.label_tag }} {{ form.title }}
+        {{ form.description.label_tag }} {{ form.description }}
+
+        <!-- Job Type -->
+        <label>Job Type:</label>
+        {{ form.job_type }}
+
+        <!-- One-Time Job Fields -->
+        <div id="oneTimeFields" style="display: none;">
+            <label for="id_job_date">Job Date:</label>
+            {{ form.job_date }}
+        </div>
+
+        <!-- Recurring Days -->
+        <div id="recurringFields" style="display: none;">
+            <label for="id_available_days">Available Days:</label>
+            {{ form.available_days }}
+        </div>
+
+        <!-- Time Range -->
+        <label>Available Time:</label>
+        {{ form.from_time.label_tag }} {{ form.from_time }}
+        {{ form.to_time.label_tag }} {{ form.to_time }}
+
+        <!-- Duration -->
+        {{ form.duration.label_tag }} {{ form.duration }}
+
+        <!-- Rate Type, Rate -->
+        {{ form.rate_type.label_tag }} {{ form.rate_type }}
+        {{ form.rate.label_tag }} {{ form.rate }}
+
+        <!-- Accepted Payment Methods -->
+        <label>Accepted Payment Methods:</label>
+        {{ form.accepted_payments }}
+
+        <!-- Requirements -->
+        {{ form.requirements.label_tag }} {{ form.requirements }}
+
+        <!-- Location -->
+        {{ form.service_area.label_tag }} {{ form.service_area }}
+
+        <!-- Contact Info -->
+        {{ form.contact_phone.label_tag }} {{ form.contact_phone }}
+        {{ form.contact_email.label_tag }} {{ form.contact_email }}
+
+        <!-- Cancellation Policy -->
+        {{ form.cancellation_policy.label_tag }} {{ form.cancellation_policy }}
+
+        <!-- Image and Certification -->
+        {{ form.image.label_tag }} {{ form.image }}
+        {{ form.certification.label_tag }} {{ form.certification }}
+
         <button type="submit" class="submit-btn">💾 Save</button>
     </form>
 </div>
+
+<script src="{% static 'js/service_form.js' %}"></script>
 {% endblock %}
+

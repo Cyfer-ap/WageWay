@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import ProviderProfile
+from multiselectfield import MultiSelectField
 
 CATEGORY_CHOICES = (
     ('Cleaning', 'Cleaning'),
@@ -26,22 +27,58 @@ DAYS_OF_WEEK = (
     ('sun', 'Sunday'),
 )
 
+PAYMENT_METHODS = (
+    ('upi', 'UPI'),
+    ('bank_transfer', 'Bank Transfer'),
+    ('cod', 'Cash on Delivery'),
+    ('credit_card', 'Credit Card'),
+)
+
+CANCELLATION_POLICIES = (
+    ('anytime', 'Anytime'),
+    ('before_24h', 'Before 24 Hours'),
+    ('before_12h', 'Before 12 Hours'),
+)
+
+JOB_TYPES = (
+    ('one_time', 'One-Time'),
+    ('recurring', 'Recurring'),
+)
+
 class Service(models.Model):
     # 🧾 Basic Info
     title = models.CharField(max_length=100)
     description = models.TextField()
-    category = models.CharField(max_length=50)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    custom_category = models.CharField(max_length=50, blank=True)  # Used when category is "Other"
     provider = models.ForeignKey(ProviderProfile, on_delete=models.CASCADE, related_name='services')
 
-    # 🌍 Service Area & Availability
-    service_area = models.CharField(max_length=100)
-    available_days = models.CharField(max_length=100)  # e.g. comma-separated "mon,tue,wed"
-    availability_time = models.CharField(max_length=100)  # e.g. "10:00 AM - 6:00 PM"
-    duration = models.CharField(max_length=50)  # e.g. "1 hour"
+    # 🌍 Job Type & Availability
+    job_type = models.CharField(max_length=15, choices=JOB_TYPES, default='one_time')
+    job_date = models.DateField(blank=True, null=True)  # One-time only
+    available_days = MultiSelectField(choices=DAYS_OF_WEEK, blank=True)  # Recurring only
+    from_time = models.TimeField(blank=True, null=True)
+    to_time = models.TimeField(blank=True, null=True)
+    duration = models.CharField(max_length=50, blank=True)  # e.g. "1 hour"
 
-    # 💰 Pricing
+    # 💰 Pricing & Payment
     rate_type = models.CharField(max_length=10, choices=RATE_TYPE_CHOICES)
     rate = models.DecimalField(max_digits=8, decimal_places=2)
+    accepted_payments = MultiSelectField(choices=PAYMENT_METHODS, blank=True)
+
+    # 🔧 Requirements
+    requirements = models.TextField(blank=True)
+
+    # 🌍 Location (with validation logic to be added)
+    service_area = models.CharField(max_length=150)
+    verified_location = models.CharField(max_length=100, blank=True)  # post + district + state
+
+    # ☎ Contact Info
+    contact_phone = models.CharField(max_length=15)
+    contact_email = models.EmailField()
+
+    # 📅 Cancellation Policy
+    cancellation_policy = models.CharField(max_length=20, choices=CANCELLATION_POLICIES, default='anytime')
 
     # 📷 Media
     image = models.ImageField(upload_to='service_images/', blank=True, null=True)
@@ -51,6 +88,9 @@ class Service(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def display_category(self):
+        return self.custom_category if self.category == 'Other' else self.category
 
     def __str__(self):
         return f"{self.title} - {self.provider.user.username}"

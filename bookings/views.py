@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from emails.utils import send_dynamic_email
 from .models import Booking
 from .forms import BookingForm
 from services.models import Service
@@ -75,6 +76,14 @@ def create_booking(request, service_id):
                     url=reverse('my_bookings')
                 )
 
+                # After booking.save()
+                send_dynamic_email(
+                    subject='Booking Confirmation - Wage Way',
+                    to_email=request.user.email,
+                    template_name='emails/booking_confirmation.html',
+                    context={'user': request.user, 'booking': booking}
+                )
+
                 return redirect('my_bookings')
     else:
         form = BookingForm()
@@ -97,13 +106,23 @@ def accept_booking(request, booking_id):
         url=reverse('my_bookings')
     )
 
+    send_dynamic_email(
+        subject='Your Booking is Approved!',
+        to_email=booking.customer.email,
+        template_name='emails/booking_approved.html',
+        context={'user': booking.customer, 'booking': booking}
+    )
+
     return redirect('provider_bookings')
+
 
 @login_required
 def reject_booking(request, booking_id):
     booking = get_object_or_404(Booking, pk=booking_id, service__provider=request.user.providerprofile)
+
     if booking.provider_response != 'waiting':
         return HttpResponseForbidden("Already responded.")
+
     booking.status = 'rejected'
     booking.provider_response = 'rejected'
     booking.save()
@@ -114,12 +133,21 @@ def reject_booking(request, booking_id):
         url=reverse('my_bookings')
     )
 
+    send_dynamic_email(
+        subject='Booking Rejected',
+        to_email=booking.customer.email,
+        template_name='emails/booking_rejected.html',
+        context={'user': booking.customer, 'booking': booking}
+    )
+
     return redirect('provider_bookings')
+
 
 @login_required
 def customer_bookings(request):
     bookings = request.user.customer_bookings.all().order_by('-booking_date')
     return render(request, 'bookings/my_bookings.html', {'bookings': bookings})
+
 
 @login_required
 def provider_bookings(request):
@@ -145,5 +173,13 @@ def cancel_booking(request, booking_id):
             url=reverse('my_bookings')
         )
 
+        send_dynamic_email(
+            subject='Booking Cancelled',
+            to_email=request.user.email,
+            template_name='emails/booking_cancelled.html',
+            context={'user': request.user, 'booking': booking}
+        )
+
         return redirect('my_bookings')
     return render(request, 'bookings/confirm_cancel.html', {'booking': booking})
+

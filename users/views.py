@@ -7,6 +7,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from .models import User
 from .forms import CustomerProfileForm, ProviderProfileForm
+from emails.utils import send_dynamic_email
+
 
 def home(request):
     return render(request, 'home.html')
@@ -41,6 +43,14 @@ def register_customer(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+
+            send_dynamic_email(
+                subject='Welcome to Wage Way!',
+                to_email=user.email,
+                template_name='emails/registration_success.html',
+                context={'user': user}
+            )
+
             return redirect('dashboard')  # change this as needed
     else:
         form = CustomerSignUpForm()
@@ -54,6 +64,14 @@ def register_provider(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+
+            send_dynamic_email(
+                subject='Welcome to Wage Way!',
+                to_email=user.email,
+                template_name='emails/registration_success.html',
+                context={'user': user}
+            )
+
             return redirect('dashboard')  # change this as needed
     else:
         form = ProviderSignUpForm()

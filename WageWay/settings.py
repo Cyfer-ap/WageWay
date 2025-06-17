@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'bookings',
     'reviews',
     'notifications',
+    'emails',
 ]
 
 INSTALLED_APPS += ['channels']
@@ -141,3 +142,12 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Default auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'hello.wageway@gmail.com'
+EMAIL_HOST_PASSWORD = 'vivk qgvq btae imdg'    # use App Password (not your login)
+DEFAULT_FROM_EMAIL = 'Wage Way <hello.wageway@gmail.com>'

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    .container { background: #fff; max-width: 600px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    .btn { background: #28a745; color: white; padding: 10px 16px; border-radius: 5px; text-decoration: none; }
+    .footer { margin-top: 25px; font-size: 12px; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 Booking Approved!</h2>
+    <p>Hello {{ user.username }},</p>
+    <p>Great news! Your booking for <strong>{{ booking.service.title }}</strong> has been <strong>approved</strong> by the provider.</p>
+    <ul>
+      <li><strong>Date:</strong> {{ booking.booking_date }}</li>
+      <li><strong>Time:</strong> {{ booking.booking_time }}</li>
+    </ul>
+    <a class="btn" href="https://yourdomain.com/bookings/my/">View Booking</a>
+
+    <div class="footer">
+      Questions? Contact support@wageway.com
+    </div>
+  </div>
+</body>
+</html>
+
+

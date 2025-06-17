@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+    .box { background: white; max-width: 600px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.05); }
+    .footer { margin-top: 25px; font-size: 12px; color: #777; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🚫 Booking Rejected</h2>
+    <p>Hi {{ user.username }},</p>
+    <p>Unfortunately, your booking request for <strong>{{ booking.service.title }}</strong> on {{ booking.booking_date }} at {{ booking.booking_time }} was <strong>rejected</strong> by the provider.</p>
+    <p>You may browse and request other providers offering similar services.</p>
+
+    <div class="footer">
+      We're here to help – support@wageway.com
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,3 @@
+Timestamp,Recipient,Subject,Template,Status,Error
+2025-06-17 12:55:13,justunofficial.ap@gmail.com,Booking Approved (Test),emails/booking_approved.html,sent,
+2025-06-17 12:57:56,justunofficial.ap@gmail.com,Booking Approved (Test),emails/booking_approved.html,sent,

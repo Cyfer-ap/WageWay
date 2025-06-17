@@ -11,6 +11,7 @@ urlpatterns = [
     path('bookings/', include('bookings.urls')),
     path('messages/', include('notifications.urls')),
     path('notifications/', include('notifications.urls')),
+    path('emails/', include('emails.urls')),
 
 
 ]

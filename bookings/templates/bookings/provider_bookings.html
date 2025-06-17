@@ -26,8 +26,8 @@
             <p><strong>Payment Method:</strong> {{ b.get_preferred_payment_display }}</p>
             <p><strong>Special Instructions:</strong> {{ b.special_instructions }}</p>
 
-            {% if b.provider_response == 'waiting' %}
             <div class="booking-actions">
+                {% if b.provider_response == 'waiting' %}
                 <form method="post" action="{% url 'accept_booking' b.id %}" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="accept-btn">✅ Accept</button>
@@ -36,8 +36,30 @@
                     {% csrf_token %}
                     <button type="submit" class="reject-btn">❌ Reject</button>
                 </form>
+                {% endif %}
+
+                {% if b.can_confirm %}
+                    {% if not b.provider_confirmed %}
+                        <a href="{% url 'provider_confirm_booking' b.id %}" class="confirm-btn">✅ Mark Completed</a>
+                    {% else %}
+                        <p>📌 You marked this as completed.</p>
+                    {% endif %}
+                    {% if not b.is_fully_completed %}
+                        <p>⏳ Awaiting customer confirmation</p>
+                    {% else %}
+                        <p>✅ Job fully completed</p>
+                        {% if not b.already_reviewed_customer %}
+                            <a href="{% url 'review_booking_customer' b.id %}" class="review-btn">📝 Leave Review</a>
+                        {% else %}
+                            <p>📝 You have already reviewed this customer.</p>
+                        {% endif %}
+
+                    {% endif %}
+                {% else %}
+                    <p>⏳ Completion option available after scheduled time.</p>
+                {% endif %}
             </div>
-            {% endif %}
+
             <a href="{% url 'conversation' user_id=b.customer.id %}" class="message-btn">💬 Message {{ b.customer.username }}</a>
         </div>
         {% endfor %}

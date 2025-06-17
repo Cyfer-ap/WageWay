@@ -153,3 +153,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hello.wageway@gmail.com'
 EMAIL_HOST_PASSWORD = 'vivk qgvq btae imdg'    # use App Password (not your login)
 DEFAULT_FROM_EMAIL = 'Wage Way <hello.wageway@gmail.com>'
+

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Review Job Poster{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/review_poster.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="review-form-wrapper">
+  <div class="review-form-card">
+    <h2 class="form-title">📝 Review Job Poster: <span>{{ poster.username }}</span></h2>
+
+    <form method="post" class="styled-review-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small>{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="error-msg">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="submit-btn">✅ Submit Review</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

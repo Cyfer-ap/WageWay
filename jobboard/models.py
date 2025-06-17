@@ -50,5 +50,13 @@ class JobApplication(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='applied')
     applied_at = models.DateTimeField(auto_now_add=True)
 
+    # ✅ Completion confirmations
+    poster_confirmed = models.BooleanField(default=False)
+    worker_confirmed = models.BooleanField(default=False)
+
     def __str__(self):
         return f"{self.applicant.username} applied to {self.job.title}"
+
+    @property
+    def is_fully_completed(self):
+        return self.poster_confirmed and self.worker_confirmed

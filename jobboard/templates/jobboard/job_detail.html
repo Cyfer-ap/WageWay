@@ -59,6 +59,17 @@
               <a href="{% url 'reject_application' app.id %}" class="btn-reject">❌ Reject</a>
             {% elif app.status == 'accepted' %}
               <p><a href="{% url 'conversation' user_id=app.applicant.id %}" class="btn-message">💬 Message Worker</a></p>
+
+              {% if not app.poster_confirmed %}
+                <form method="post" action="{% url 'confirm_job_completion' app.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-confirm">✅ Mark as Completed by Worker</button>
+                </form>
+              {% endif %}
+
+              {% if app.is_fully_completed %}
+                <p class="badge-completed">🎉 Job Fully Completed (Confirmed by Both)</p>
+              {% endif %}
             {% endif %}
           </div>
         {% endfor %}
@@ -72,8 +83,23 @@
     {% for app in job.applications.all %}
       {% if app.applicant == user %}
         <p><strong>Status:</strong> <span class="badge-status">{{ app.get_status_display }}</span></p>
+
         {% if app.status == 'accepted' %}
           <p><a href="{% url 'conversation' user_id=job.posted_by.id %}" class="btn-message">💬 Message Job Poster</a></p>
+
+          {% if not app.worker_confirmed %}
+            <div class="confirm-job-wrapper">
+              <form method="post" action="{% url 'confirm_job_completion' app.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-confirm">✅ I Completed This Job</button>
+              </form>
+            </div>
+
+          {% endif %}
+
+          {% if app.is_fully_completed %}
+            <p class="badge-completed">🎉 Job Fully Completed (Confirmed by Both)</p>
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endfor %}

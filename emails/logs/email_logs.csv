@@ -7,3 +7,4 @@ Timestamp,Recipient,Subject,Template,Status,Error
 2025-06-17 16:13:42,justunofficial.ap@gmail.com,You’ve Been Accepted! - Wage Way,emails/job_application_accepted.html,sent,
 2025-06-17 16:13:46,justunofficial.ap@gmail.com,Applicant Accepted - Wage Way,emails/job_application_accepted_notify_poster.html,sent,
 2025-06-17 16:14:20,justunofficial.ap@gmail.com,Application Rejected - Wage Way,emails/job_application_rejected.html,sent,
+2025-06-18 02:02:10,cust1@example.com,Job Post Confirmation - Wage Way,emails/job_post_confirmation.html,sent,

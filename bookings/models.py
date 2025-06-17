@@ -44,8 +44,18 @@ class Booking(models.Model):
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # Completion Confirmation
+    provider_confirmed = models.BooleanField(default=False)
+    customer_confirmed = models.BooleanField(default=False)
+
+    @property
+    def is_fully_completed(self):
+        return self.provider_confirmed and self.customer_confirmed
+
     def __str__(self):
         return f"{self.service.title} for {self.customer.username} on {self.booking_date} at {self.booking_time}"
 
     def can_be_paid(self):
         return self.status == 'confirmed' and self.provider_response == 'accepted'
+
+

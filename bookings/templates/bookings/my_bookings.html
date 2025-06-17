@@ -27,7 +27,23 @@
                 <a href="{% url 'conversation' user_id=b.service.provider.user.id %}" class="message-btn">💬 Message {{ b.service.provider.user.username }}</a>
 
                 {% if b.can_be_paid %}
-                <a href="#" class="pay-btn">💰 Pay</a> <!-- Replace with your payment gateway URL -->
+                <a href="#" class="pay-btn">💰 Pay</a>
+                {% endif %}
+
+                {% if b.can_confirm %}
+                    {% if not b.customer_confirmed %}
+                        <a href="{% url 'customer_confirm_booking' b.id %}" class="confirm-btn">✅ Mark Completed</a>
+                    {% else %}
+                        <p>📌 You marked this as completed.</p>
+                    {% endif %}
+                    {% if not b.is_fully_completed %}
+                        <p>⏳ Awaiting provider confirmation</p>
+                    {% else %}
+                        <p>✅ Job fully completed</p>
+                        <a href="{% url 'review_provider_for_booking' b.id %}" class="review-btn">📝 Leave a Review</a>
+                    {% endif %}
+                {% else %}
+                    <p>⏳ Completion option available after scheduled time.</p>
                 {% endif %}
             </div>
         </div>

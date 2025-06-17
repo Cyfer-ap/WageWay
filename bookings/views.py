@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from emails.utils import send_dynamic_email
+from reviews.models import Review
 from .models import Booking
 from .forms import BookingForm
 from services.models import Service
@@ -10,7 +11,7 @@ from notifications.models import Notification
 from django.http import HttpResponseForbidden
 from django.utils.timezone import now
 from django.utils.timezone import make_aware
-
+from django.contrib import messages
 
 
 @login_required
@@ -145,14 +146,50 @@ def reject_booking(request, booking_id):
 
 @login_required
 def customer_bookings(request):
-    bookings = request.user.customer_bookings.all().order_by('-booking_date')
-    return render(request, 'bookings/my_bookings.html', {'bookings': bookings})
+    bookings = Booking.objects.filter(customer=request.user)
+
+    for booking in bookings:
+        booking.can_confirm = (
+            booking.status == 'confirmed'
+            and booking.provider_response == 'accepted'
+            and (
+                booking.booking_date < now().date() or
+                (booking.booking_date == now().date() and booking.booking_time <= now().time())
+            )
+        )
+
+    return render(request, 'bookings/my_bookings.html', {
+        'bookings': bookings
+    })
 
 
 @login_required
 def provider_bookings(request):
-    bookings = Booking.objects.filter(service__provider=request.user.providerprofile).order_by('-booking_date')
-    return render(request, 'bookings/provider_bookings.html', {'bookings': bookings})
+    bookings = Booking.objects.filter(service__provider=request.user.providerprofile)
+
+    for booking in bookings:
+        # Determine if completion confirmation is available
+        booking.can_confirm = (
+            booking.status == 'confirmed'
+            and booking.provider_response == 'accepted'
+            and (
+                booking.booking_date < now().date() or
+                (booking.booking_date == now().date() and booking.booking_time <= now().time())
+            )
+        )
+
+        # Attach review existence info (provider → customer)
+        booking.already_reviewed_customer = Review.objects.filter(
+            reviewer=request.user,
+            booking=booking,
+            review_type='provider_to_customer'  # This must match the new review_type choice
+        ).exists()
+
+    return render(request, 'bookings/provider_bookings.html', {
+        'bookings': bookings
+    })
+
+
 
 @login_required
 def cancel_booking(request, booking_id):
@@ -182,4 +219,24 @@ def cancel_booking(request, booking_id):
 
         return redirect('my_bookings')
     return render(request, 'bookings/confirm_cancel.html', {'booking': booking})
+
+@login_required
+def mark_provider_completed(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.user == booking.service.provider.user:
+        booking.provider_confirmed = True
+        booking.save()
+        messages.success(request, "Marked as completed by provider.")
+    return redirect('provider_bookings')
+
+
+@login_required
+def mark_customer_completed(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.user == booking.customer:
+        booking.customer_confirmed = True
+        booking.save()
+        messages.success(request, "Marked as completed by customer.")
+    return redirect('my_bookings')
+
 

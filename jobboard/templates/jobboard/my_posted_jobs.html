@@ -24,6 +24,14 @@
         </div>
         <p class="job-info">💰 ₹{{ job.payment }} &nbsp; • &nbsp; 📅 {{ job.date_needed }}</p>
         <a href="{% url 'job_detail' job.id %}" class="view-btn">🔎 View Details</a>
+
+        <div class="review-section">
+          {% if job.can_review %}
+            <a href="{% url 'review_worker' job.id %}" class="review-btn">📝 Review Worker</a>
+          {% endif %}
+        </div>
+
+
       </div>
     {% empty %}
       <div class="no-jobs">

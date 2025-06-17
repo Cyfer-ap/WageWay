@@ -10,7 +10,6 @@
 {% block content %}
 <div class="applications-wrapper">
   <h2 class="section-title">📑 Jobs I've Applied To</h2>
-
   <div class="application-list">
     {% for app in applications %}
       <div class="application-card">
@@ -18,6 +17,11 @@
         <p class="rate">💰 Expected Rate: ₹{{ app.expected_rate }}</p>
         <p class="status">📌 Status: <span class="badge-status">{{ app.get_status_display }}</span></p>
         <a href="{% url 'job_detail' app.job.id %}" class="details-btn">🔍 View Job Details</a>
+        {% if app.status == 'accepted' and app.job.is_assigned %}
+          {% if app.can_review %}
+            <a href="{% url 'review_poster' app.job.id %}" class="review-btn">📝 Review Job Poster</a>
+          {% endif %}
+        {% endif %}
       </div>
     {% empty %}
       <div class="no-applications">

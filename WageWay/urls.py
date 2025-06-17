@@ -13,6 +13,7 @@ urlpatterns = [
     path('notifications/', include('notifications.urls')),
     path('emails/', include('emails.urls')),
     path('jobs/', include('jobboard.urls')),
+    path('reviews/', include('reviews.urls')),
 
 ]
 if settings.DEBUG:

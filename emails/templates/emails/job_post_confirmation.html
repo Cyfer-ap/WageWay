@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Job Posted</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body style="font-family: 'Roboto', sans-serif; background: #f5f5f5; padding: 20px;">
+  <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+    <h2 style="color: #2c3e50;">📢 Job Successfully Posted</h2>
+    <p>Hello {{ user.username }},</p>
+    <p>Your job <strong>{{ job.title }}</strong> has been successfully posted on <a href="https://wageway.onrender.com" style="color: #2c7be5;">Wage Way</a>.</p>
+
+    <ul style="padding-left: 20px;">
+      <li><strong>Category:</strong> {{ job.get_category_display }}</li>
+      <li><strong>Location:</strong> {{ job.location }}</li>
+      <li><strong>Payment:</strong> ₹{{ job.payment }}</li>
+      <li><strong>Duration:</strong> {{ job.duration }}</li>
+      <li><strong>Date Needed:</strong> {{ job.date_needed }}</li>
+      <li><strong>Preferred Payment:</strong> {{ job.get_preferred_payment_display }}</li>
+    </ul>
+
+    <p>Log in anytime to manage applications and track progress.</p>
+    <a href="https://wageway.onrender.com/jobs/my-posts/" style="display: inline-block; padding: 10px 20px; background: #2c7be5; color: white; text-decoration: none; border-radius: 5px;">View My Jobs</a>
+
+    <p style="margin-top: 40px;">Thanks,<br>The Wage Way Team</p>
+  </div>
+</body>
+</html>

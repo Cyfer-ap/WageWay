@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'reviews',
     'notifications',
     'emails',
+    'jobboard',
+
 ]
 
 INSTALLED_APPS += ['channels']

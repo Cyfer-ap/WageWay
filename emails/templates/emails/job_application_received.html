@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>New Application</title><link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></head>
+<body style="font-family: 'Roboto', sans-serif; background: #f5f5f5; padding: 20px;">
+  <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+    <h2 style="color: #27ae60;">📩 New Application Received</h2>
+    <p>Hello {{ user.username }},</p>
+    <p><strong>{{ applicant.username }}</strong> has applied to your job: <strong>{{ job.title }}</strong>.</p>
+
+    <p>Login now to view their message, resume, and decide if you want to accept or reject them.</p>
+    <a href="https://wageway.onrender.com/jobs/{{ job.id }}/" style="display: inline-block; padding: 10px 20px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px;">Review Application</a>
+
+    <p style="margin-top: 30px;">You can always chat with your applicants once you've reviewed them.</p>
+    <p style="margin-top: 40px;">Cheers,<br>Wage Way Team</p>
+  </div>
+</body>
+</html>

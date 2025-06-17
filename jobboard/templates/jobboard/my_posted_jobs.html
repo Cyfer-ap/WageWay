@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Posted Jobs{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/my_posted_jobs.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="posted-wrapper">
+  <h2 class="section-title">📢 My Posted Jobs</h2>
+
+  <div class="job-list">
+    {% for job in jobs %}
+      <div class="job-card">
+        <div class="job-header">
+          <h3><a href="{% url 'job_detail' job.id %}">{{ job.title }}</a></h3>
+          {% if job.is_assigned %}
+            <span class="status assigned">Assigned</span>
+          {% else %}
+            <span class="status open">Open</span>
+          {% endif %}
+        </div>
+        <p class="job-info">💰 ₹{{ job.payment }} &nbsp; • &nbsp; 📅 {{ job.date_needed }}</p>
+        <a href="{% url 'job_detail' job.id %}" class="view-btn">🔎 View Details</a>
+      </div>
+    {% empty %}
+      <div class="no-jobs">
+        <p>😕 You haven’t posted any jobs yet.</p>
+        <a href="{% url 'post_job' %}" class="post-btn">➕ Post a Job Now</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

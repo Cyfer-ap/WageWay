@@ -1,0 +1,94 @@
+body {
+  background: linear-gradient(to right, #d9e4f5, #f5f9ff);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.post-job-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+.post-job-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 45px;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #007bff;
+}
+
+.form-title {
+  font-size: 26px;
+  color: #005792;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.styled-form .form-group {
+  margin-bottom: 20px;
+}
+
+.styled-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #333;
+}
+
+.styled-form input[type="text"],
+.styled-form input[type="number"],
+.styled-form input[type="date"],
+.styled-form textarea,
+.styled-form select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f9f9f9;
+  transition: 0.3s;
+}
+
+.styled-form input:focus,
+.styled-form textarea:focus,
+.styled-form select:focus {
+  background: #fff;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.styled-form small {
+  display: block;
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 4px;
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+  font-size: 16px;
+  background: linear-gradient(to right, #00b09b, #96c93d);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #00a38f, #82b92f);
+}

@@ -12,7 +12,7 @@ urlpatterns = [
     path('messages/', include('notifications.urls')),
     path('notifications/', include('notifications.urls')),
     path('emails/', include('emails.urls')),
-
+    path('jobs/', include('jobboard.urls')),
 
 ]
 if settings.DEBUG:

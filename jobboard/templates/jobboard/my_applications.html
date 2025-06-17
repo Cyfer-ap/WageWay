@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Applications{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/my_applications.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="applications-wrapper">
+  <h2 class="section-title">📑 Jobs I've Applied To</h2>
+
+  <div class="application-list">
+    {% for app in applications %}
+      <div class="application-card">
+        <h3 class="job-title">{{ app.job.title }}</h3>
+        <p class="rate">💰 Expected Rate: ₹{{ app.expected_rate }}</p>
+        <p class="status">📌 Status: <span class="badge-status">{{ app.get_status_display }}</span></p>
+        <a href="{% url 'job_detail' app.job.id %}" class="details-btn">🔍 View Job Details</a>
+      </div>
+    {% empty %}
+      <div class="no-applications">
+        <p>😕 You haven’t applied to any jobs yet.</p>
+        <a href="{% url 'job_list' %}" class="browse-link">👉 Browse Jobs</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

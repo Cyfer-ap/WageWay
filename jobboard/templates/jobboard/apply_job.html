@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Apply to {{ job.title }}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/apply_job.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="apply-container">
+  <div class="glass-card">
+    <h2 class="title">🚀 Apply to: <span>{{ job.title }}</span></h2>
+
+    <form method="post" enctype="multipart/form-data" class="glass-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small>{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

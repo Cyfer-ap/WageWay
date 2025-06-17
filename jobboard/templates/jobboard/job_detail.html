@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Job Details{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/job_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="job-wrapper">
+  <div class="job-card">
+    <h1 class="job-title">{{ job.title }}</h1>
+
+    <div class="job-meta">
+      <p><strong>📂 Category:</strong> {{ job.get_category_display }}</p>
+      <p><strong>📍 Location:</strong> {{ job.location }}</p>
+      <p><strong>⏳ Duration:</strong> {{ job.duration }}</p>
+      <p><strong>💰 Payment:</strong> ₹{{ job.payment }}</p>
+      <p><strong>💳 Preferred Payment:</strong> {{ job.get_preferred_payment_display }}</p>
+      <p><strong>📅 Needed On:</strong> {{ job.date_needed }}</p>
+    </div>
+
+    <div class="job-description">
+      <h3>Description</h3>
+      <p>{{ job.description }}</p>
+    </div>
+
+    <div class="job-status">
+      <strong>Status:</strong>
+      {% if job.is_assigned %}
+        <span class="badge-assigned">Assigned</span>
+      {% else %}
+        <span class="badge-open">Open</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <hr>
+
+  {% if user == job.posted_by %}
+    <div class="application-section">
+      <h2>📥 Applications Received</h2>
+      {% if applications %}
+        {% for app in applications %}
+          <div class="app-card">
+            <p><strong>👤 Applicant:</strong> {{ app.applicant.username }}</p>
+            <p><strong>💸 Expected Rate:</strong> ₹{{ app.expected_rate }}</p>
+            <p><strong>📝 Message:</strong><br>{{ app.message }}</p>
+
+            {% if app.resume %}
+              <p><a href="{{ app.resume.url }}" class="resume-link">📄 View Resume</a></p>
+            {% endif %}
+
+            <p><strong>Status:</strong> <span class="badge-status">{{ app.get_status_display }}</span></p>
+
+            {% if app.status != 'accepted' and app.status != 'rejected' and not job.is_assigned %}
+              <a href="{% url 'accept_application' app.id %}" class="btn-accept">✅ Accept</a>
+              <a href="{% url 'reject_application' app.id %}" class="btn-reject">❌ Reject</a>
+            {% elif app.status == 'accepted' %}
+              <p><a href="{% url 'conversation' user_id=app.applicant.id %}" class="btn-message">💬 Message Worker</a></p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No applications received yet.</p>
+      {% endif %}
+    </div>
+
+  {% elif has_applied %}
+    <p class="info-text"><em>✅ You have already applied to this job.</em></p>
+    {% for app in job.applications.all %}
+      {% if app.applicant == user %}
+        <p><strong>Status:</strong> <span class="badge-status">{{ app.get_status_display }}</span></p>
+        {% if app.status == 'accepted' %}
+          <p><a href="{% url 'conversation' user_id=job.posted_by.id %}" class="btn-message">💬 Message Job Poster</a></p>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+  {% elif not job.is_assigned %}
+    <a href="{% url 'apply_to_job' job.id %}" class="btn-apply">✉️ Apply for this Job</a>
+  {% endif %}
+</div>
+{% endblock %}

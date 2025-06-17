@@ -1,0 +1,116 @@
+body {
+  background: linear-gradient(to right, #eef2f3, #f9fcff);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.posted-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #005792;
+  margin-bottom: 35px;
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.job-card {
+  background: #ffffff;
+  border-left: 5px solid #007bff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-header h3 a {
+  color: #0077cc;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.job-header h3 a:hover {
+  text-decoration: underline;
+}
+
+.job-info {
+  font-size: 14px;
+  color: #444;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.status.assigned {
+  background: linear-gradient(to right, #28a745, #218838);
+}
+
+.status.open {
+  background: linear-gradient(to right, #dc3545, #c82333);
+}
+
+.view-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background: linear-gradient(to right, #007bff, #0056b3);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.view-btn:hover {
+  background: linear-gradient(to right, #0056b3, #004494);
+}
+
+.no-jobs {
+  background: white;
+  text-align: center;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+.post-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.post-btn:hover {
+  background: linear-gradient(to right, #009ee0, #005bbf);
+}

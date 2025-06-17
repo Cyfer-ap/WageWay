@@ -1,3 +1,9 @@
 Timestamp,Recipient,Subject,Template,Status,Error
 2025-06-17 12:55:13,justunofficial.ap@gmail.com,Booking Approved (Test),emails/booking_approved.html,sent,
 2025-06-17 12:57:56,justunofficial.ap@gmail.com,Booking Approved (Test),emails/booking_approved.html,sent,
+2025-06-17 16:10:06,justunofficial.ap@gmail.com,Job Post Confirmation - Wage Way,emails/job_post_confirmation.html,sent,
+2025-06-17 16:11:29,justunofficial.ap@gmail.com,New Application Received - Wage Way,emails/job_application_received.html,sent,
+2025-06-17 16:13:00,justunofficial.ap@gmail.com,Application Submitted - Wage Way,emails/job_application_confirmation.html,sent,
+2025-06-17 16:13:42,justunofficial.ap@gmail.com,You’ve Been Accepted! - Wage Way,emails/job_application_accepted.html,sent,
+2025-06-17 16:13:46,justunofficial.ap@gmail.com,Applicant Accepted - Wage Way,emails/job_application_accepted_notify_poster.html,sent,
+2025-06-17 16:14:20,justunofficial.ap@gmail.com,Application Rejected - Wage Way,emails/job_application_rejected.html,sent,

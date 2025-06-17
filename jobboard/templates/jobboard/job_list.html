@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Available Jobs{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/job_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="job-list-wrapper">
+  <h2 class="page-title">💼 Available Jobs</h2>
+
+  <form method="get" class="search-form">
+    <input type="text" name="q" placeholder="🔍 Search jobs..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="job-grid">
+    {% for job in jobs %}
+      <div class="job-card">
+        <h3><a href="{% url 'job_detail' job.id %}">{{ job.title }}</a></h3>
+        <p class="job-meta">💰 ₹{{ job.payment }} &nbsp; | &nbsp; 📂 {{ job.get_category_display }}</p>
+        <p class="job-location">📍 {{ job.location }}</p>
+        <a href="{% url 'job_detail' job.id %}" class="view-btn">View Details →</a>
+      </div>
+    {% empty %}
+      <p class="no-jobs">🚫 No jobs available at the moment.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

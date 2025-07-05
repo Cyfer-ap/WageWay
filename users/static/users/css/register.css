@@ -1,86 +1,106 @@
-/* static/css/register.css */
-
-/* Entry animation for elements */
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-h2 {
-    text-align: center;
-    color: #004466;
-    font-size: 2rem;
-    margin-bottom: 25px;
-    animation: fadeSlideIn 0.6s ease-in-out;
-}
-
-form {
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 25px 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    animation: fadeSlideIn 0.8s ease-in-out;
-}
-
-form p {
-    margin-bottom: 15px;
-    animation: fadeSlideIn 1s ease-in-out;
-}
-
-form label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #333;
-    animation: fadeSlideIn 1s ease-in-out;
-}
-
-form input,
-form select,
-form textarea {
+/* 🔮 Background Animation */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    margin-top: 5px;
-    transition: border 0.3s, box-shadow 0.3s;
-    animation: fadeSlideIn 1s ease-in-out;
+    height: 100%;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
 }
 
-form input:focus,
-form select:focus,
-form textarea:focus {
-    border-color: #0099cc;
-    box-shadow: 0 0 0 3px rgba(0, 153, 204, 0.2);
-    outline: none;
+/* Container */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-form button[type="submit"] {
-    display: block;
-    width: 100%;
-    background-color: #004466;
+/* Frosted Glass Register Box */
+.register-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 350px;
     color: white;
-    font-size: 1.1rem;
-    padding: 10px 0;
-    margin-top: 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    animation: fadeSlideIn 1.2s ease-in-out;
+    text-align: center;
+    z-index: 10;
+    position: relative;
 }
 
-form button[type="submit"]:hover {
-    background-color: #006699;
-    transform: scale(1.02);
+/* Fade-in animation */
+.animated-fade {
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form elements */
+.register-box form input,
+.register-box form select,
+.register-box form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+    transition: background 0.3s ease;
+}
+.register-box form input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Sign Up Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #00c9a7;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.register-btn:hover {
+    background-color: #00b59c;
+}
+
+/* Extra links */
+.extra-links {
+    margin-top: 15px;
+}
+.extra-links a {
+    color: #aee5e2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.extra-links a:hover {
+    color: #ffffff;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+
+
+/* Background Gradient Animation Keyframes */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }

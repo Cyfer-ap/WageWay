@@ -8,10 +8,33 @@
 {% endblock %}
 
 {% block content %}
-<h2>Register as {{ role }}</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign Up</button>
-</form>
+<div class="animated-bg"></div>
+
+<div class="register-container">
+    <div class="register-box animated-fade">
+        <h2>Register as {{ role }}</h2>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {# Display errors (including password validation feedback) #}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="register-btn">Sign Up</button>
+        </form>
+
+        <div class="extra-links">
+            <a href="#">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
